@@ -1,40 +1,28 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { render } from 'react-dom';
 
 
 
-const chirps = "http:/chirps"
 
-const ChirpsList = React.createClass({
-        this.state = {
-            chirpsArr: [],
-        }
-    }
-    componentDidMount(){
-            console.log('MOUNTED!!');
-
-        fetch(chirps)
-        .then(res => {
-            console.log(res);
-            return res.json();
-        });
-
-        }
-
-    render(){
-        return (
-            <div className="content">
-                <div className="card chirpContainer">
-                    
-
-                </div>
-            </div>
+function ChirpsList (props) {
+    
+        return (<div className="chirps-list">
+            {this.props.chirps.map((chirp, index) => {
+                return <li key={`chirp-${index}`}>
+                            <p>{chirp.name}</p>
+                            <p>{chirp.text}</p> 
+                        </li>;
+            })}
+        </div>
         )
-    }
-    
-
-
-    
-});
-
-export default ChirpsList;
+};
+                // for (var key in chirps) {
+                //     if (chirps.hasOwnProperty(key)) {
+                //         var val = chirps[key];
+                //         var chirpName = chirps[key].user;
+                //         var chirpText = chirps[key].text;
+                //         console.log(val.id)
+                //         console.log(chirpName);
+                //         console.log(chirpText);
+                //     }
+                // }

@@ -5,6 +5,6 @@ import chirpRouter from './chirps';
 let router = Router();
 
 router.use('/people', peopleRouter);
-router.use('./chirps', chirpRouter);
+router.use('/chirps', chirpRouter);
 
 export default router;

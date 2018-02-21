@@ -1,11 +1,13 @@
 const express = require('express');
 const queries = require('../filestore');
+const cors = require('cors');
 let router = express.Router();
 // function find(id) {
 //     return chirpMessage.filter(c => c.id == id)[0];
 //   }
 
-
+let app = express();
+app.use(cors());
 // READ - read all
 router.get('/', (req, res) => {
     res.json(queries.GetChirps())

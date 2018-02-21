@@ -1,7 +1,7 @@
 const fs = require('fs');
 let chirps = { nextid: 0 };
 
-  
+
 
 if(fs.existsSync('chirps.json')) {
     chirps = JSON.parse(fs.readFileSync('chirps.json'));

@@ -5,12 +5,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 var express = require('express');
 var queries = require('../filestore');
+var cors = require('cors');
 var router = express.Router();
 // function find(id) {
 //     return chirpMessage.filter(c => c.id == id)[0];
 //   }
 
-
+var app = express();
+app.use(cors());
 // READ - read all
 router.get('/', function (req, res) {
     res.json(queries.GetChirps());

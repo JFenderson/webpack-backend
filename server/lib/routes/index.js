@@ -19,6 +19,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = (0, _express.Router)();
 
 router.use('/people', _people2.default);
-router.use('./chirps', _chirps2.default);
+router.use('/chirps', _chirps2.default);
 
 exports.default = router;

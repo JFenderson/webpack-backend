@@ -4,7 +4,7 @@ const chirps = "../../server/src/routes/chirps.js"
 
 
 
-class ChirpRouter extends Component {
+class ChirpForm extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -28,10 +28,12 @@ class ChirpRouter extends Component {
     render(){
         return(
             <div>
+                <h1>Welcome to Chirper</h1>
                 <input type="text" id="chirpInput" value={ this.state.value }/>
-                <button id=""></button>
+                <button id="">Send Chirp</button>
             </div>
         )
     }
 }
 
+export default ChirpForm;

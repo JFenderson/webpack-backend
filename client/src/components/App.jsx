@@ -1,30 +1,36 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import HelloWorld from './hello';
-import GoodbyeWorld from './goodbye';
-import ChirpsList from './chirpsList';
+// import Chirp from './Chirp';
+// import ChirpsList from './ChirpsList';
+// import ChirpForm from './ChirpForm';
 
-class Navigation extends Component {
+const chirpApi = "http://localhost:3000/api/chirps";
 
+class App extends Component {
+    constructor(props){
+        super(props)
+
+        this.state = {
+            chirps: []
+        }
+    }
+
+    componentDidMount(){
+        fetch(chirpApi)
+        .then(res => res.json())
+        .then(obj => this.setState({ 
+            chirps: obj
+        })
+       
+    )}
+ 
     render() {
         return (
-            <div>
-                <HelloWorld />
-                <GoodbyeWorld />
-                <ChirpsList />
-            </div>
-            // <Router>
-            //     <Fragment>
-            //         <Link to="/goodbye">Goodbye</Link>
-            //         <Switch>
-            //             <Route exact path="/" component={HelloWorld} />
-            //             <Route path="/goodbye" component={GoodbyeWorld} />
-            //             <Route exact path="/" component={ChirpsList} />
-            //         </Switch>
-            //     </Fragment>
-            // </Router>
+           <div>
+              <h1>h</h1>
+           </div>
         )
     }
 }
 
-export default Navigation;
+export default App;
