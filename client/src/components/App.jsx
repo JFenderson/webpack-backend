@@ -1,21 +1,28 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import HelloWorld from './Hello';
-import GoodbyeWorld from './Goodbye';
-import ChirpRouter from './ChirpForm';
+import HelloWorld from './hello';
+import GoodbyeWorld from './goodbye';
+import ChirpsList from './chirpsList';
 
 class Navigation extends Component {
-    render(){
+
+    render() {
         return (
-            <Router>
-                <Fragment>
-                    <Link to='/Goodbye'>Goodbye</Link>
-                    <Switch>
-                        <Route exact path='/' component={HelloWorld} />
-                        <Route path='/Goodbye' component={GoodbyeWorld} />
-                    </Switch>
-                </Fragment>
-            </Router>
+            <div>
+                <HelloWorld />
+                <GoodbyeWorld />
+                <ChirpsList />
+            </div>
+            // <Router>
+            //     <Fragment>
+            //         <Link to="/goodbye">Goodbye</Link>
+            //         <Switch>
+            //             <Route exact path="/" component={HelloWorld} />
+            //             <Route path="/goodbye" component={GoodbyeWorld} />
+            //             <Route exact path="/" component={ChirpsList} />
+            //         </Switch>
+            //     </Fragment>
+            // </Router>
         )
     }
 }

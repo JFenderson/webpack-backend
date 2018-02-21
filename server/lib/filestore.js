@@ -1,15 +1,10 @@
 'use strict';
 
-var _fs = require('fs');
-
-var _fs2 = _interopRequireDefault(_fs);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+var fs = require('fs');
 var chirps = { nextid: 0 };
 
-if (_fs2.default.existsSync('chirps.json')) {
-    chirps = JSON.parse(_fs2.default.readFileSync('chirps.json'));
+if (fs.existsSync('chirps.json')) {
+    chirps = JSON.parse(fs.readFileSync('chirps.json'));
 }
 
 var getChirps = function getChirps() {
@@ -36,7 +31,7 @@ var deleteChirp = function deleteChirp(id) {
 };
 
 var writeChirps = function writeChirps() {
-    _fs2.default.writeFileSync('chirps.json', JSON.stringify(chirps));
+    fs.writeFileSync('chirps.json', JSON.stringify(chirps));
 };
 
 module.exports = {

@@ -1,9 +1,6 @@
-import { Router } from 'express';
-
-let router = Router();
-
+const express = require('express');
 const queries = require('../filestore');
-
+let router = express.Router();
 // function find(id) {
 //     return chirpMessage.filter(c => c.id == id)[0];
 //   }

@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import chirpsRouter from './chirps';
+import peopleRouter from './people';
+import chirpRouter from './chirps';
 
-const router = Router();
+let router = Router();
 
-router.use('/chirps', chirpsRouter);
-
-
+router.use('/people', peopleRouter);
+router.use('./chirps', chirpRouter);
 
 export default router;

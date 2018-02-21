@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import chirps from '../../../server/src/routes/chirps';
+
+const chirps = "../../server/src/routes/chirps.js"
 
 
 
@@ -12,6 +13,8 @@ class ChirpRouter extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
     }
+
+    
 
     handleChange(e){
         this.setState({value: e.target.value});

@@ -3,13 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-var _express = require('express');
-
-var router = (0, _express.Router)();
-
+var express = require('express');
 var queries = require('../filestore');
-
+var router = express.Router();
 // function find(id) {
 //     return chirpMessage.filter(c => c.id == id)[0];
 //   }
