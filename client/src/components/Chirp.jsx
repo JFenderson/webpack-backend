@@ -19,7 +19,11 @@ class Chirp extends Component{
 //             )
         render(){
         return (
-                <li>{this.props.chirp.name}{this.props.chirp.text}</li>
+                <div>
+                     <h2>{props.config.name}</h2>
+                <p>{props.config.text}</p>   
+                </div>
+                
                 )
         }
  }

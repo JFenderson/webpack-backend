@@ -15,37 +15,38 @@ class App extends Component {
         }
     }
 
-        loadChirps(){
-        $.ajax({
-        url: chirpApi,
-        dataType: 'json',
-        cache: false,
-        success: function(chirps) {
-          this.setState({chirps: chirps.chirps });
-          console.log(chirps);
-        }.bind(this),
-        error: function(xhr, status, err) {
-          console.error(this.props.url, status, err.toString());
-        }.bind(this)
-      });
-    }
+    //     loadChirps(){
+    //     $.ajax({
+    //     url: chirpApi,
+    //     dataType: 'json',
+    //     cache: false,
+    //     success: function(chirps) {
+    //       this.setState({chirps: chirps.chirps });
+    //       console.log(chirps);
+    //     }.bind(this),
+    //     error: function(xhr, status, err) {
+    //       console.error(this.props.url, status, err.toString());
+    //     }.bind(this)
+    //   });
+    // }
 
     componentDidMount(){
-        // fetch(chirpApi)
-        // .then(res => res.json())
-        // .then(obj => this.setState({ 
-        //     chirps: obj
-        // })
-        console.log(this.props.children)
-       this.loadChirps();
-    }
+        fetch(chirpApi)
+        .then(res => res.json())
+        .then((chirps) => {
+            this.setState({ 
+            chirps
+        });
+    })
+}
  
     render() {
+        const mapped = this.state.chirps.map((chirp)=>{
+            return <Chirp config={chirp} key={chirp.id} />
+        });
         return (
            <div>
-                <h1>this is the parent component</h1>
-                <ChirpsList chirps={this.state.chirps}/>
-
+                { mapped }
            </div>
         )
     }
