@@ -19645,6 +19645,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(47);
 
+var _ChirpsList = __webpack_require__(76);
+
+var _ChirpsList2 = _interopRequireDefault(_ChirpsList);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19652,12 +19656,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 // import Chirp from './Chirp';
-// import ChirpsList from './ChirpsList';
+
+
 // import ChirpForm from './ChirpForm';
 
-var chirpApi = "http://localhost:3000/api/chirps";
+var chirpApi = 'http://localhost:3000/api/chirps';
 
 var App = function (_Component) {
     _inherits(App, _Component);
@@ -19674,17 +19678,31 @@ var App = function (_Component) {
     }
 
     _createClass(App, [{
+        key: 'loadChirps',
+        value: function loadChirps() {
+            $.ajax({
+                url: chirpApi,
+                dataType: 'json',
+                cache: false,
+                success: function (chirps) {
+                    this.setState({ chirps: chirps.chirps });
+                    console.log(chirps);
+                }.bind(this),
+                error: function (xhr, status, err) {
+                    console.error(this.props.url, status, err.toString());
+                }.bind(this)
+            });
+        }
+    }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this2 = this;
-
-            fetch(chirpApi).then(function (res) {
-                return res.json();
-            }).then(function (obj) {
-                return _this2.setState({
-                    chirps: obj
-                });
-            });
+            // fetch(chirpApi)
+            // .then(res => res.json())
+            // .then(obj => this.setState({ 
+            //     chirps: obj
+            // })
+            console.log(this.props.children);
+            this.loadChirps();
         }
     }, {
         key: 'render',
@@ -19695,8 +19713,9 @@ var App = function (_Component) {
                 _react2.default.createElement(
                     'h1',
                     null,
-                    'h'
-                )
+                    'this is the parent component'
+                ),
+                _react2.default.createElement(_ChirpsList2.default, { chirps: this.state.chirps })
             );
         }
     }]);
@@ -23410,6 +23429,198 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
     return targetComponent;
 };
 
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Chirp = __webpack_require__(77);
+
+var _Chirp2 = _interopRequireDefault(_Chirp);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ChirpsList = function (_Component) {
+    _inherits(ChirpsList, _Component);
+
+    function ChirpsList(props) {
+        _classCallCheck(this, ChirpsList);
+
+        return _possibleConstructorReturn(this, (ChirpsList.__proto__ || Object.getPrototypeOf(ChirpsList)).call(this, props));
+    }
+
+    _createClass(ChirpsList, [{
+        key: 'render',
+        value: function render() {
+            var chirp = this.props.chirps.map(function (chirp) {
+                return _react2.default.createElement(_Chirp2.default, {
+                    chirp: chirp,
+                    key: chirp.id });
+            });
+            return _react2.default.createElement(
+                'ul',
+                { className: 'chirp-list' },
+                chirp
+            );
+        }
+    }]);
+
+    return ChirpsList;
+}(_react.Component);
+
+;
+
+exports.default = ChirpsList;
+//<ul>
+//  {this.props.chirps.map((contact)=>{
+//  return <Chirp chirp={chirp}/>
+//  })}
+//  
+//  
+//</ul>
+
+
+// function ChirpsList (props) {
+
+//         return (<div className="chirps-list">
+//             {this.props.chirps.map((chirp, index) => {
+//                 return <li key={`chirp-${index}`}>
+//                             <p>{chirp.name}</p>
+//                             <p>{chirp.text}</p> 
+//                         </li>;
+//             })}
+//         </div>
+//         )
+// };
+// for (var key in chirps) {
+//     if (chirps.hasOwnProperty(key)) {
+//         var val = chirps[key];
+//         var chirpName = chirps[key].user;
+//         var chirpText = chirps[key].text;
+//         console.log(val.id)
+//         console.log(chirpName);
+//         console.log(chirpText);
+//     }
+// }
+
+
+// var DonationList = React.createClass({
+//     render: function() {
+//       var donationNodes = this.props.data.map(function(donation) {
+//         //map the data to individual donations
+//         return (
+//           <Donation
+//             contributor={donation.contributor}
+//             key={donation.id}
+//             amount={donation.amount}
+//           >
+//             {donation.comment}
+//           </Donation>
+//         );
+//       });
+//       //print all the nodes in the list
+//       return (
+//         <div className="donationList">
+//           {donationNodes}
+//         </div>
+//       );
+//     }
+//   });
+
+/***/ }),
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+        value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+//TURN INTO A CLASS
+
+var Chirp = function (_Component) {
+        _inherits(Chirp, _Component);
+
+        function Chirp(props) {
+                _classCallCheck(this, Chirp);
+
+                return _possibleConstructorReturn(this, (Chirp.__proto__ || Object.getPrototypeOf(Chirp)).call(this, props));
+        }
+        //  var chirp = props.chirps.map((chirp) => {
+        //      console.log(chirp)
+        //             return (
+        //                 <div>
+        //                     <p key={this.props.chirp.id}>
+        //                         {this.props.chirp.name}{this.props.chirp.text}
+        //                     </p>
+        //                     <h1>this is the child of </h1>
+        //                 </div>
+        //             )
+
+
+        _createClass(Chirp, [{
+                key: 'render',
+                value: function render() {
+                        return _react2.default.createElement(
+                                'li',
+                                null,
+                                this.props.chirp.name,
+                                this.props.chirp.text
+                        );
+                }
+        }]);
+
+        return Chirp;
+}(_react.Component);
+//  )}
+
+
+// ChirpsList = React.createClass({
+//     render() {
+//         return <div className="chirps-list">
+//             
+//             })}
+//         </div>;
+//     }
+// });
+
+
+exports.default = Chirp;
 
 /***/ })
 /******/ ]);

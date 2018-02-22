@@ -1,21 +1,29 @@
-import React from 'react';
-import ChirpsList from './ChirpsList';
+import React, { Component } from 'react';
 
-function Chirp (props){
- var chirp = props.chirps.map((chirp) => {
-     console.log(chirp)
-            return (
-                <div>
-                    <ChirpsList />
-                </div>
-            )
+
+//TURN INTO A CLASS
+
+class Chirp extends Component{
+        constructor(props){
+                super(props)
+        }
+//  var chirp = props.chirps.map((chirp) => {
+//      console.log(chirp)
+//             return (
+//                 <div>
+//                     <p key={this.props.chirp.id}>
+//                         {this.props.chirp.name}{this.props.chirp.text}
+//                     </p>
+//                     <h1>this is the child of </h1>
+//                 </div>
+//             )
+        render(){
         return (
-            <div>
-                { chirplist }
-            </div>
+                <li>{this.props.chirp.name}{this.props.chirp.text}</li>
                 )
+        }
  }
- )}
+//  )}
 
 
 
@@ -32,3 +40,4 @@ function Chirp (props){
 
 
 
+export default Chirp;
