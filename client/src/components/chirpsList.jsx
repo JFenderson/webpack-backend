@@ -23,7 +23,7 @@ class ChirpsList extends Component{
     }
 };
 
-export default ChirpsList;
+// export default ChirpsList;
 //<ul>
 //  {this.props.chirps.map((contact)=>{
 //  return <Chirp chirp={chirp}/>

@@ -2,59 +2,59 @@ const express = require('express');
 const queries = require('../filestore');
 const cors = require('cors');
 let router = express.Router();
-// function find(id) {
-//     return chirpMessage.filter(c => c.id == id)[0];
-//   }
 
 let app = express();
 app.use(cors());
+
+
+
 // READ - read all
-router.get('/', (req, res) => {
-    res.json(queries.GetChirps())
+router.get('/', (req, res, next) => {
+    queries.GetChirps()
+        .then((chirps)=>{
+            res.send(chirps);
+        })
     console.log('got chirps');
 });
 
 
 // READ - read one
 router.get('/:id', (req, res) => {
-    res.json(queries.GetChirp(`./chirps/${chirps.id}`));
+    const id = req.params.id;
+
+    queries.GetChirp(id)
+    .then((chirp)=>{
+        res.send(chirp);
+    });
     console.log(req.params.id);
 });
 
 // CREATE - creates one
-router.post('/', (req, res) => {
-  queries.CreateChirp(req.params.id, req.body)
-      res.redirect(`./chirps/${chirps.id}`);
+router.post('/', (req, res, next) => {
+    const id = req.params.id;
+  queries.CreateChirp(req.body)
+      .then((id)=>{
+          res.status(201).json({ id });
+      })
       console.log('created a chirp');
 });
-
-// router.post('/', (req, res) => {
-//     queries.CreateChirp(req.body);
-//     res.sendStatus(200);
-//     console.log('posted');
-// });
-
-// // Update - show update form
-// router.put('/:id/edit', (req, res) => {
-//   queries.UpdateChirp(req.params.id, req.body)
-//     console.log(req.params.id);
-//     console.log('updated chirp');
-// });
-
 
 
 // UPDATE - updates one
 router.put('/:id', (req, res) => {
-    queries.UpdateChirp(`./chirps/${chirps.id}`)
-      res.redirect(`./chirps`);
+    queries.UpdateChirp(req.params.id, req.body)
+      .then(() => {
+          res.sendStatus(204);
+      })
       console.log('updated a chirp');
 });
 
 // DELETE - deletes one
 router.delete('/:id', (req, res) => {
-    queries.DeleteChirp(`./chirps/${chirps.id}`)
-      res.redirect('./chirps');
-      console.log(req.params.id);
+    queries.DeleteChirp(id)
+      .then(()=>{
+          res.sendStatus(204);
+      })
       console.log('deleted a chirp');
 });
 

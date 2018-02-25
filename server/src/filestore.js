@@ -1,37 +1,58 @@
 const fs = require('fs');
-let chirps = { nextid: 0 };
+const shortid = require('shortid');
+const path = require('path');
 
+const chirpsPath = path.join(__dirname, '..', 'chirps.json');
 
+let chirps = [];
 
-if(fs.existsSync('chirps.json')) {
-    chirps = JSON.parse(fs.readFileSync('chirps.json'));
+if (fs.existsSync(chirpsPath)) {
+    chirps = JSON.parse(fs.readFileSync(chirpsPath));
 }
 
 let getChirps = () => {
-    return Object.assign({}, chirps); //create a copy and return it
-}
+    return Promise.resolve([...chirps]);
+};
 
 let getChirp = id => {
-    return Object.assign({}, chirps[id]); //create a copy and return it
-}
+    const found = chirps.find((chirp) => chirp.id === id);
+    return Promise.resolve(Object.assign({}, found));
+};
 
 let createChirp = (chirp) => {
-    chirps[chirps] = chirp;
-    writeChirps();
+    return new Promise((resolve, reject) => {
+        const id = shortid.generate();
+
+        chirp.id = id;
+        chirps = [...chirps, chirp];
+        writeChirps();
+        resolve(id);
+    });
 };
 
 let updateChirp = (id, chirp) => {
-    chirps[id] = chirp;
-    writeChirps();
-}
+    return new Promise((resolve, reject) => {
+        const foundIndex = chirps.findIndex((chirp) => chirp.id === id);
+        const found = chirps[foundIndex];
+        const updatedChirp = Object.assign({}, found, chirp);
+        chirps.splice(foundIndex, 1);
+        chirps = [...chirps, updatedChirp];
+        writeChirps();
+        resolve();
+    });
+};
 
 let deleteChirp = id => {
-    delete chirps[id];
-    writeChirps();
-}
+    return new Promise((resolve, reject) => {
+        const foundIndex = chirps.findIndex((chirp) => chirp.id === id);
+        chirps.splice(foundIndex, 1);
+        writeChirps();
+        resolve();
+    });
+};
 
 let writeChirps = () => {
-    fs.writeFileSync('chirps.json', JSON.stringify(chirps));
+    fs.writeFileSync(chirpsPath, JSON.stringify(chirps));
 };
 
 module.exports = {
@@ -40,4 +61,4 @@ module.exports = {
     GetChirps: getChirps,
     GetChirp: getChirp,
     UpdateChirp: updateChirp
-}
+};

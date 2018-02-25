@@ -2,7 +2,7 @@
   "name": "in-class-db-api",
   "version": "1.0.0",
   "description": "",
-  "main": "server/lib/index.js",
+  "main": "index.js",
   "scripts": {
     "build:client": "webpack",
     "build:server": "babel ./server/src -d ./server/lib",
@@ -13,7 +13,7 @@
     "watch:client": "webpack --watch",
     "watch:server": "babel ./server/src -w -d ./server/lib"
   },
-  "author": "Covalence",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "babel-cli": "^6.26.0",
@@ -24,6 +24,7 @@
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.2",
+    "isomorphic-fetch": "^2.2.1",
     "morgan": "^1.9.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -33,6 +34,7 @@
     "webpack": "^3.10.0"
   },
   "devDependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "concurrently": "^3.5.1",
     "nodemon": "^1.14.12"
   }

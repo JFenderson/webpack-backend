@@ -4,7 +4,7 @@ function stateRouting(req, res, next) {
     if (isServerAsset(req.url)) {
         next();
     } else {
-        res.sendFile(join(__dirname, '../../../client/index.html'));
+        res.sendFile(join(__dirname, '../../../client/dist/index.html'));
     }
 }
 

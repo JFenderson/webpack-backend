@@ -14,13 +14,17 @@ var _morgan = require('morgan');
 
 var _morgan2 = _interopRequireDefault(_morgan);
 
+var _filestore = require('./filestore');
+
+var _filestore2 = _interopRequireDefault(_filestore);
+
 var _bodyParser = require('body-parser');
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
 
-var _routes = require('./routes');
+var _index = require('./routes/index');
 
-var _routes2 = _interopRequireDefault(_routes);
+var _index2 = _interopRequireDefault(_index);
 
 var _routing = require('./middleware/routing.mw');
 
@@ -28,7 +32,7 @@ var _routing2 = _interopRequireDefault(_routing);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var CLIENT_PATH = (0, _path.join)(__dirname, '../../client');
+var CLIENT_PATH = (0, _path.join)(__dirname, '../../client/dist');
 
 var app = (0, _express2.default)();
 
@@ -39,7 +43,7 @@ app.use(_express2.default.json());
 app.use(_bodyParser2.default.json());
 app.use(_bodyParser2.default.urlencoded({ extended: true }));
 
-app.use('/api', _routes2.default);
+app.use('/api', _index2.default);
 
 app.use(_routing2.default);
 
@@ -47,20 +51,3 @@ var port = process.env.PORT || 3000;
 app.listen(port, function () {
     console.log('Server listening on port ' + port);
 });
-
-// const express = require('express');
-// const cors = require('cors');
-// const apiRouter = require('./routes');
-// const router = express.Router();
-// const bodyParser = require('body-parser');
-// const path = require('path');
-// const mustache = require('mustache');
-
-// let app = express();
-
-// app.use(cors());
-// app.use(express.json());
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
-
-// app.use(express.static(path.join(__dirname, '../client')));
