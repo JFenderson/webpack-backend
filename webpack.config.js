@@ -1,6 +1,6 @@
 const path = require('path');
 
-const CLIENT_DEST = path.join(__dirname, './client/dist');
+const CLIENT_DEST = path.join(__dirname, './client');
 
 module.exports = {
     entry: './client/src/index.js',

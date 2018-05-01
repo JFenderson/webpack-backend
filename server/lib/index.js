@@ -32,7 +32,7 @@ var _routing2 = _interopRequireDefault(_routing);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var CLIENT_PATH = (0, _path.join)(__dirname, '../../client/dist');
+var CLIENT_PATH = (0, _path.join)(__dirname, '../../client');
 
 var app = (0, _express2.default)();
 

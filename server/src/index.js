@@ -9,7 +9,7 @@ import stateRouting from './middleware/routing.mw';
 
 
 
-const CLIENT_PATH = join(__dirname, '../../client/dist');
+const CLIENT_PATH = join(__dirname, '../../client');
 
 let app = express();
 

@@ -2,7 +2,7 @@
   "name": "in-class-db-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/lib/index.js",
   "scripts": {
     "build:client": "webpack",
     "build:server": "babel ./server/src -d ./server/lib",
